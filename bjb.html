@@ -1,0 +1,15 @@
+def note():
+    print("1.写笔记  2.查看全部笔记")
+    choice = input("请选择功能：")
+    if choice == "1":
+        text = input("请输入内容：")
+        with open("笔记本.txt","a",encoding="utf-8") as f:
+            f.write(text + "\n")
+        print("保存成功！")
+    elif choice == "2":
+        try:
+            with open("笔记本.txt","r",encoding="utf-8") as f:
+                print(f.read())
+        except:
+            print("暂无笔记文件")
+note()
