@@ -1,0 +1,10 @@
+import random
+# 武器库、品级、伤害区间
+weapons = ["屠龙刀","青龙偃月枪","凤鸣剑","玄铁斧","幽冥刺"]
+rank = ["凡品","良品","精品","史诗","传说"]
+min_dmg = [10,25,45,70,100]
+max_dmg = [20,40,65,90,150]
+
+idx = random.randint(0,4)
+dmg = random.randint(min_dmg[idx], max_dmg[idx])
+print(f"【{rank[idx]}】{weapons[idx]} | 攻击力：{dmg}")
