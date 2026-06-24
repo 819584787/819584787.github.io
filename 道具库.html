@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>道具库</title>
+    <style>
+        .container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+        .item-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+        .important { color: red; font-weight: bold; }
+        button { margin: 5px; padding: 5px 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>道具对象</h1>
+    <div id="items"></div>
+    <button onclick="addItem()">添加道具</button>
+</div>
+
+<script>
+let items = [
+    { title: "生命药水", content: "恢复50点生命值", important: true },
+    { title: "隐身卷轴", content: "持续10秒隐身效果", important: false }
+];
+
+function showItems() {
+    let html = "";
+    for (let i = 0; i < items.length; i++) {
+        let n = items[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="item-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('items').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    items[index].important = !items[index].important;
+    showItems();
+}
+
+function addItem() {
+    let itemTitle = prompt("新道具的名字: ");
+    let itemContent = prompt("新道具的描述: ");
+    items.push({ title: itemTitle, content: itemContent, important: false });
+    showItems();
+}
+
+showItems();
+</script>
+</body>
+</html>
