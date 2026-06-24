@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>图书库</title>
+    <style>
+        .container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+        .book-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+        .important { color: red; font-weight: bold; }
+        button { margin: 5px; padding: 5px 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>图书对象</h1>
+    <div id="books"></div>
+    <button onclick="addBook()">添加图书</button>
+</div>
+
+<script>
+let books = [
+    { title: "Python编程入门", content: "零基础学习Python的经典教材", important: true },
+    { title: "Linux运维实战", content: "服务器管理与网络配置", important: false }
+];
+
+function showBooks() {
+    let html = "";
+    for (let i = 0; i < books.length; i++) {
+        let n = books[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="book-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('books').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    books[index].important = !books[index].important;
+    showBooks();
+}
+
+function addBook() {
+    let bookTitle = prompt("新图书的名字: ");
+    let bookContent = prompt("新图书的描述: ");
+    books.push({ title: bookTitle, content: bookContent, important: false });
+    showBooks();
+}
+
+showBooks();
+</script>
+</body>
+</html>
