@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>任务清单库</title>
+    <style>
+        .container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+        .task-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+        .important { color: red; font-weight: bold; }
+        button { margin: 5px; padding: 5px 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>任务对象</h1>
+    <div id="tasks"></div>
+    <button onclick="addTask()">添加任务</button>
+</div>
+
+<script>
+let tasks = [
+    { title: "Python作业", content: "完成武器库代码编写", important: true },
+    { title: "Linux配置", content: "配置nmcli网络环境", important: false }
+];
+
+function showTasks() {
+    let html = "";
+    for (let i = 0; i < tasks.length; i++) {
+        let n = tasks[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="task-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('tasks').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    tasks[index].important = !tasks[index].important;
+    showTasks();
+}
+
+function addTask() {
+    let taskTitle = prompt("新任务的标题: ");
+    let taskContent = prompt("新任务的内容: ");
+    tasks.push({ title: taskTitle, content: taskContent, important: false });
+    showTasks();
+}
+
+showTasks();
+</script>
+</body>
+</html>
