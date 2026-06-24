@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>车辆库</title>
+    <style>
+        .container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+        .item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+        .important { color: red; font-weight: bold; }
+        button { margin: 5px; padding: 5px 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>载具对象</h1>
+    <div id="box"></div>
+    <button onclick="addData()">添加载具</button>
+</div>
+<script>
+let list = [
+    {title:"暗夜跑车",content:"极速代步，越野性能极强",important:true},
+    {title:"飞天摩托",content:"低空飞行，不受路面阻挡",important:false}
+];
+function show(){
+    let html=""
+    for(let i=0;i<list.length;i++){
+        let c=list[i].important?"important":""
+        html+=`<div class="item">
+        <h3 class="${c}">${list[i].title}</h3>
+        <p>${list[i].content}</p>
+        <button onclick="change(${i})">切换重要</button>
+        </div>`
+    }
+    document.getElementById("box").innerHTML=html
+}
+function change(i){
+    list[i].important=!list[i].important
+    show()
+}
+function addData(){
+    let name=prompt("输入载具名称")
+    let msg=prompt("输入载具功能")
+    list.push({title:name,content:msg,important:false})
+    show()
+}
+show()
+</script>
+</body>
+</html>
